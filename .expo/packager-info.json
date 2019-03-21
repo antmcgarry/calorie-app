@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 64215,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://ge-93p.anonymous.calorie-app.exp.direct",
   "packagerNgrokUrl": "https://packager.ge-93p.anonymous.calorie-app.exp.direct",
-  "ngrokPid": 64229,
+  "ngrokPid": 91834,
   "webpackServerPort": null
 }
