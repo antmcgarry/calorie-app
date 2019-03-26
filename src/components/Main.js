@@ -1,8 +1,10 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
-import { Item, Input, Label } from 'native-base';
+import { StyleSheet, ScrollView, View, StatusBar } from 'react-native';
+import { Item, Input, Label, Button, Text, Toast } from 'native-base';
 import { Dropdown } from 'react-native-material-dropdown';
 import { CheckBox } from '../commonComponents';
+import { PRIMARYCOLOR } from '../utils/Colors';
 
 const weightOption = [
   {
@@ -25,7 +27,7 @@ const heightOption = [
 const activityOption = [
   {
     value: 'noneActivity',
-    label: 'Little or no exercise (desk Job)'
+    label: 'Little or no exercise (Desk Job)'
   },
   {
     value: 'lightActivity',
@@ -44,20 +46,21 @@ const activityOption = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginTop: '10%',
     marginHorizontal: 10
   },
   checkBoxContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: '20%',
-    marginVertical: 20
+    marginTop: 20
   },
   optionContainer: {
     flex: 1,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: '5%'
   },
   dropDownStyle: {
     width: '30%'
@@ -65,6 +68,19 @@ const styles = StyleSheet.create({
   inputBoxStyle: {
     height: 50,
     marginTop: 12
+  },
+  buttonStyle: {
+    alignSelf: 'center',
+    width: '100%',
+    marginTop: '3%',
+    justifyContent: 'center'
+  },
+  buttonTextStyle: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  labelStyle: {
+    marginVertical: '2%'
   }
 });
 
@@ -74,6 +90,9 @@ class Main extends Component {
     height: 'Feet',
     activityLevel: '',
     age: '',
+    weightAmount: '',
+    heightAmountField1: '',
+    heightAmountField2: '',
     male: false,
     female: false
   };
@@ -89,14 +108,65 @@ class Main extends Component {
     }
   }
 
+  error(message) {
+    return Toast.show({
+      text: message,
+      type: 'danger',
+      duration: 3000
+    });
+  }
+
+  handleSubmit({
+    weight,
+    height,
+    age,
+    male,
+    female,
+    weightAmount,
+    heightAmountField1,
+    heightAmountField2
+  }) {
+    console.log(weightAmount);
+    console.log(age);
+    console.log(heightAmountField1);
+    console.log(heightAmountField2);
+    if (
+      isNaN(weightAmount) ||
+      weightAmount === '' ||
+      isNaN(age) ||
+      age === '' ||
+      isNaN(heightAmountField1) ||
+      heightAmountField1 === '' ||
+      isNaN(heightAmountField2) ||
+      heightAmountField2 === ''
+    ) {
+      return this.error('Please fill in all fields');
+    }
+
+    if (!male && !female) return this.error('Please select a gender');
+    return true;
+  }
+
   render() {
-    const { weight, height, activityLevel, age, male, female } = this.state;
+    const {
+      weight,
+      height,
+      activityLevel,
+      age,
+      male,
+      female,
+      heightAmountField1,
+      heightAmountField2,
+      weightAmount
+    } = this.state;
     return (
       <ScrollView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={PRIMARYCOLOR} />
         <Item floatingLabel>
           <Label>Age</Label>
-          <Input />
+          <Input onChangeText={text => this.setState({ age: text })} value={age} />
         </Item>
+        <Text style={styles.labelStyle}>Gender</Text>
         <View style={styles.checkBoxContainer}>
           <CheckBox
             label="Male"
@@ -109,9 +179,14 @@ class Main extends Component {
             onPress={() => this.onSelectGender('female', !female)}
           />
         </View>
+        <Text style={styles.labelStyle}>Weight</Text>
         <View style={styles.optionContainer}>
           <Item regular style={[styles.inputBoxStyle, { width: '65%' }]}>
-            <Input placeholder="Weight" />
+            <Input
+              placeholder="Weight"
+              value={weightAmount}
+              onChangeText={text => this.setState({ weightAmount: text })}
+            />
           </Item>
           <Dropdown
             containerStyle={styles.dropDownStyle}
@@ -121,12 +196,21 @@ class Main extends Component {
             onChangeText={index => this.setState({ weight: index })}
           />
         </View>
+        <Text style={styles.labelStyle}>Height</Text>
         <View style={styles.optionContainer}>
           <Item regular style={[styles.inputBoxStyle, { width: '30%' }]}>
-            <Input placeholder={height !== 'Feet' ? 'Metre' : 'Feet'} />
+            <Input
+              placeholder={height !== 'Feet' ? 'Metre' : 'Feet'}
+              value={heightAmountField1}
+              onChangeText={text => this.setState({ heightAmountField1: text })}
+            />
           </Item>
           <Item regular style={[styles.inputBoxStyle, { width: '30%' }]}>
-            <Input placeholder={height !== 'Feet' ? 'cm' : 'Inch'} />
+            <Input
+              placeholder={height !== 'Feet' ? 'cm' : 'Inch'}
+              value={heightAmountField2}
+              onChangeText={text => this.setState({ heightAmountField2: text })}
+            />
           </Item>
           <Dropdown
             containerStyle={styles.dropDownStyle}
@@ -142,6 +226,9 @@ class Main extends Component {
           value={activityLevel}
           onChangeText={index => this.setState({ activityLevel: index })}
         />
+        <Button style={styles.buttonStyle} onPress={() => this.handleSubmit(this.state)}>
+          <Text style={styles.buttonTextStyle}>Calculate</Text>
+        </Button>
       </ScrollView>
     );
   }
