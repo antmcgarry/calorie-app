@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import userStats from '../components/userReducer';
+import userStats from '../components/userProfile/userReducer';
+import foodList from '../components/foodList/FoodListReducer';
 
 const rootReducer = combineReducers({
-  test: userStats
+  User: userStats,
+  Food: foodList
 });
 
 export default rootReducer;

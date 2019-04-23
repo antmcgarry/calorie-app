@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "Task": "Add 5 Items",
+    "Complete": true,
+    "Date": "11/01/19",
+    "Points": 10
+  },
+  {
+    "id": 2,
+    "Task": "Completed user information",
+    "Complete": true,
+    "Date": "08/01/19",
+    "Points": 20
+  },
+  {
+    "id": 3,
+    "Task": "Add 10 Items",
+    "Complete": true,
+    "Date": "15/01/19",
+    "Points": 20
+  },
+  {
+    "id": 4,
+    "Task": "Lose 2 KG",
+    "Complete": true,
+    "Date": "20/01/19",
+    "Points": 10
+  },
+  {
+    "id": 5,
+    "Task": "Add 20 Items",
+    "Complete": false,
+    "Date": "",
+    "Points": 30
+  },
+  {
+    "id": 6,
+    "Task": "Lose 5 KG",
+    "Complete": false,
+    "Date": "",
+    "Points": 50
+  },
+  {
+    "id": 7,
+    "Task": "Reach level 5",
+    "Complete": false,
+    "Date": "",
+    "Points": 50
+  },
+  {
+    "id": 8,
+    "Task": "Reach level 10",
+    "Complete": false,
+    "Date": "",
+    "Points": 100
+  },
+  {
+    "id": 9,
+    "Task": "Reach level 20",
+    "Complete": false,
+    "Date": "",
+    "Points": 200
+  },
+  {
+    "id": 10,
+    "Task": "Reach level 2",
+    "Complete": true,
+    "Date": "11/01/19",
+    "Points": 10
+  }
+]
