@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 
 class UserGoalScreen extends Component {
   static navigationOptions = {
-    drawerLabel: 'User Goals'
+    drawerLabel: 'Goals',
+    iconName: 'flame'
   };
 
   state = {

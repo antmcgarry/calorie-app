@@ -10,7 +10,8 @@ import * as userActions from './userProfile/userActions';
 
 class LandingScreen extends Component {
   static navigationOptions = {
-    drawerLabel: 'Home'
+    drawerLabel: 'Home',
+    iconName: 'home'
   };
 
   constructor(props) {

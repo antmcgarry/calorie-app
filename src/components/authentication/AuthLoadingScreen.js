@@ -1,9 +1,9 @@
 import React from 'react';
-import { AsyncStorage, View, StyleSheet, Image } from 'react-native';
+import { AsyncStorage, View, StyleSheet, Image, StatusBar } from 'react-native';
 import { Spinner } from 'native-base';
 import firebase from 'firebase';
 import { WHITECOLOR, PRIMARYCOLOR } from '../../utils/Colors';
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/index';
+import { SCREEN_HEIGHT, SCREEN_WIDTH, resetAction } from '../../utils/index';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,17 +28,21 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   bootstrapAsync = async () => {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     const result = await AsyncStorage.getItem('stats');
     firebase.auth().onAuthStateChanged(user => {
       AsyncStorage.setItem('account', JSON.stringify(user));
       if (result) {
         const statsJson = JSON.parse(result);
         if (statsJson.finishedInfo && user) {
-          navigate('Drawer', { account: user, stats: statsJson });
+          navigation.dispatch(resetAction('Drawer', { account: user, stats: statsJson }));
+        } else {
+          navigation.navigate('Auth');
         }
+      } else if (user) {
+        navigation.navigate(user ? 'App' : 'Auth', { account: user });
       } else {
-        navigate(user ? 'App' : 'Auth', { account: user });
+        navigation.navigate('Auth');
       }
     });
   };
@@ -47,6 +51,8 @@ class AuthLoadingScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={PRIMARYCOLOR} />
+
         <Image
           source={require('../../../assets/logo.png')}
           style={styles.imageStyle}

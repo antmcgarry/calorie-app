@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PureChart from 'react-native-pure-chart';
 import { Text, Dimensions, View, StyleSheet } from 'react-native';
-import { Container, Content, Button, Item, Input, Spinner } from 'native-base';
+import { Container, Content, Spinner } from 'native-base';
 import { HeaderBar } from '../../commonComponents';
 import * as classActions from '../userProfile/userActions';
-import { PRIMARYCOLOR, WHITECOLOR } from '../../utils/Colors';
 import {
   getDailyProtein,
   calculateStoneToPounds,
@@ -38,7 +37,8 @@ const styles = StyleSheet.create({
 
 class Progress extends Component {
   static navigationOptions = {
-    drawerLabel: 'User Progression'
+    drawerLabel: 'Progression',
+    iconName: 'analytics'
   };
 
   constructor(props) {

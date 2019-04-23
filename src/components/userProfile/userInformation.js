@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
 
 class UserInformation extends Component {
   static navigationOptions = {
-    drawerLabel: 'User Information'
+    drawerLabel: 'Information',
+    iconName: 'person'
   };
 
   state = {

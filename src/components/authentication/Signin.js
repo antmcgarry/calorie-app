@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, AsyncStorage, Text, Image } from 'react-native';
+import { StyleSheet, AsyncStorage, Text, Image, StatusBar } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import firebase from 'firebase';
@@ -87,6 +87,8 @@ class SigninScreen extends Component {
         })}
         render={({ values, handleSubmit, setFieldValue, errors, touched, setFieldTouched }) => (
           <Container>
+            <StatusBar barStyle="light-content" backgroundColor={PRIMARYCOLOR} />
+
             <Content scrollEnabled={false} contentContainerStyle={styles.container}>
               <Image
                 source={require('../../../assets/logo.png')}

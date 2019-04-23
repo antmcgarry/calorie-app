@@ -4,3 +4,4 @@ export const WHITECOLOR = '#ffffff';
 export const CHECKBOXACTIVECOLOR = '#07BF20';
 export const CIRCLEOFFSETCOLOR = '#DBDBDB';
 export const REWARDSCOLOR = 'rgba(111, 226, 172, 0.9)';
+export const ACTIVEBACKGROUNDCOLOR = '#d0cdf7';

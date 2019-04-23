@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
 });
 
 class Rewards extends Component {
+  static navigationOptions = {
+    drawerLabel: 'Rewards',
+    iconName: 'trophy'
+  };
+
   state = {
     fontLoaded: false,
     loading: true,
@@ -79,6 +84,7 @@ class Rewards extends Component {
       navigation: { goBack, navigate }
     } = this.props;
     const { loading, fontLoaded, rewards, level, points, nextLevelPoints } = this.state;
+    const remainingPercent = points !== 100 ? `0.${points}` : 1;
     return (
       <Container>
         <HeaderBar onLeftPress={() => goBack()} onRightPress={() => navigate('Rewards')} />
@@ -87,7 +93,7 @@ class Rewards extends Component {
             <>
               <View style={{ margin: 10 }}>
                 <Text style={styles.titleStyle}>Level: {level}</Text>
-                <Progress.Bar progress={0.7} width={SCREEN_WIDTH * 0.9} />
+                <Progress.Bar progress={parseFloat(remainingPercent)} width={SCREEN_WIDTH * 0.9} />
                 <Text style={{ alignSelf: 'flex-end' }}>
                   {points}/{nextLevelPoints}
                 </Text>

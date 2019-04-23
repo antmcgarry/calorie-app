@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 class FoodListScreen extends Component {
   static navigationOptions = {
-    drawerLabel: () => null
+    drawerLabel: 'Food List'
   };
 
   componentDidMount() {

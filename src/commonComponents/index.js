@@ -8,3 +8,5 @@ export * from './HeaderBar';
 export * from './list/FoodListItem';
 export * from './sections/Dashboard';
 export * from './buttons/RewardsIconButton';
+export * from './buttons/TextButton';
+export * from './customDrawer';

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
 import { error } from '../../utils/index';
 import {
   FOOD_LIST_LOADING,
@@ -24,7 +23,7 @@ export const getFoodItems = () => {
         });
       })
       .catch(e => {
-        console.log(e);
+        error(e);
       })
       .finally(() => {
         dispatch({ type: FOOD_LIST_LOADING, payload: { prop: 'loadingList', value: false } });
@@ -41,6 +40,5 @@ export const removeFood = (item, mealType) => dispatch => {
 };
 
 export const loadFoodLists = (food, type) => dispatch => {
-  console.log(food);
   dispatch({ type: LOAD_FOOD_ITEMS, payload: { prop: type, value: food } });
 };

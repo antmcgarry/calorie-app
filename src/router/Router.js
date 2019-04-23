@@ -1,11 +1,13 @@
 /* eslint-disable import/no-unresolved */
+import React from 'react';
 import {
   createSwitchNavigator,
   createStackNavigator,
   createAppContainer,
   createDrawerNavigator
 } from 'react-navigation';
-import { PRIMARYCOLOR, WHITECOLOR } from '../utils/Colors';
+import { PRIMARYCOLOR, ACTIVEBACKGROUNDCOLOR } from '../utils/Colors';
+import { CustomDrawer } from '../commonComponents';
 import UserInformation from '../components/userProfile/userInformation';
 import SigninScreen from '../components/authentication/Signin';
 import AuthLoadingScreen from '../components/authentication/AuthLoadingScreen';
@@ -30,7 +32,14 @@ const MyDrawerNavigator = createDrawerNavigator(
     navigationOptions: {
       header: null,
       headerMode: 'none'
-    }
+    },
+    contentOptions: {
+      activeTintColor: PRIMARYCOLOR,
+      activeBackgroundColor: ACTIVEBACKGROUNDCOLOR
+    },
+    gesturesEnabled: false,
+    swipeEnabled: false,
+    contentComponent: props => <CustomDrawer {...props} />
   }
 );
 
