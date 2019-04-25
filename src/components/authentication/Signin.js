@@ -49,8 +49,6 @@ class SigninScreen extends Component {
         navigation.navigate('App');
       })
       .catch(e => {
-        console.log(e);
-
         if (e.code === 'auth/user-not-found') {
           firebase
             .auth()
@@ -59,8 +57,6 @@ class SigninScreen extends Component {
               navigation.navigate('App');
             })
             .catch(er => {
-              console.log(er);
-
               const errorMessage = er.message;
               error(errorMessage);
               this.setState({ loading: false });

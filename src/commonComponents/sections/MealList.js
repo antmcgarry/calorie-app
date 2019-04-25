@@ -35,35 +35,42 @@ const MealList = ({
   onPressDelete,
   onPressRow,
   mealType
-}) => (
-  <View style={styles.container}>
-    <View style={{ backgroundColor: labelColor, maxWidth: labelWidth }}>
-      <Label>{Title}</Label>
-    </View>
-    <Card style={styles.cardContainer}>
-      <View style={styles.cardHeader}>
-        <Text>Total Calories: </Text>
-        <IconButton
-          name="ios-add-circle-outline"
-          iconStyle={styles.iconStyle}
-          onPress={onPressPlus}
-        />
+}) => {
+  let totalCalories = 0;
+  data.forEach(item => {
+    totalCalories = totalCalories + item.nutrition.energy;
+    return;
+  });
+  return (
+    <View style={styles.container}>
+      <View style={{ backgroundColor: labelColor, maxWidth: labelWidth }}>
+        <Label>{Title}</Label>
       </View>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <FoodListItem
-            name={item.name}
-            calories={item.nutrition.energy}
-            onPressInfo={() => onPressDelete(item, mealType)}
-            onPressRow={onPressRow}
-            removeItem
+      <Card style={styles.cardContainer}>
+        <View style={styles.cardHeader}>
+          <Text>Total Calories: {totalCalories}</Text>
+          <IconButton
+            name="ios-add-circle-outline"
+            iconStyle={styles.iconStyle}
+            onPress={onPressPlus}
           />
-        )}
-        keyExtractor={(item, index) => item.id}
-      />
-    </Card>
-  </View>
-);
+        </View>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <FoodListItem
+              name={item.name}
+              calories={item.nutrition.energy}
+              onPressInfo={() => onPressDelete(item, mealType)}
+              onPressRow={onPressRow}
+              removeItem
+            />
+          )}
+          keyExtractor={(item, index) => item.id}
+        />
+      </Card>
+    </View>
+  );
+};
 
 export { MealList };

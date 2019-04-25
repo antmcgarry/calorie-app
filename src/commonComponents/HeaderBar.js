@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   }
 });
 const backArrow = Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back';
-const HeaderBar = ({ onLeftPress, wantManu, onRightPress, notBlank = true }) => {
+const HeaderBar = ({ onLeftPress, wantMenu, onRightPress, notBlank = true }) => {
   if (!notBlank) return <View style={styles.container} />;
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={PRIMARYCOLOR} />
-      {wantManu ? (
+      {wantMenu ? (
         <IconButton
           name="menu"
           iconStyle={styles.iconTextStyle}

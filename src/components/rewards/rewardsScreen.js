@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
 import axios from 'axios';
-import { bindActionCreators } from 'redux';
 import { Container, Content, Spinner } from 'native-base';
 import * as Progress from 'react-native-progress';
 import { View, Alert, Text, StyleSheet } from 'react-native';
@@ -119,11 +118,4 @@ class Rewards extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    state: state.User
-  }),
-  dispatch => ({
-    // actions: bindActionCreators(classActions, dispatch)
-  })
-)(Rewards);
+export default Rewards;

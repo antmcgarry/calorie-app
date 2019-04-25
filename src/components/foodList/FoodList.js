@@ -1,29 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, Spinner, ListItem } from 'native-base';
-import { TouchableOpacity, FlatList, Text, View, StyleSheet } from 'react-native';
+import { Card, Spinner } from 'native-base';
+import { FlatList, View, StyleSheet } from 'react-native';
 import * as classActions from './FoodListActions';
-import { SearchBar, HeaderBar, IconButton, FoodListItem } from '../../commonComponents';
+import { SearchBar, HeaderBar, FoodListItem } from '../../commonComponents';
 import { foodToast } from '../../utils';
-
-const styles = StyleSheet.create({
-  listContainer: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginLeft: 0,
-    paddingRight: 0
-  },
-  listButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1,
-    padding: 10
-  },
-  foodTitle: {
-    fontWeight: 'bold'
-  }
-});
 
 class FoodListScreen extends Component {
   static navigationOptions = {

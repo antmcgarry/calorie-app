@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation';
 import { Container, Content, Footer, Button } from 'native-base';
 import { TextButton } from './buttons/TextButton';
 import { WHITECOLOR, CIRCLEOFFSETCOLOR } from '../utils/Colors';
-import { error, SCREEN_HEIGHT, SCREEN_WIDTH } from '../utils/index';
+import { error, SCREEN_HEIGHT } from '../utils/index';
 
 const styles = StyleSheet.create({
   labelStyle: {
@@ -39,17 +39,15 @@ const onLogout = navigation => {
     .auth()
     .signOut()
     .then(async () => {
-      await AsyncStorage.removeItem('account');
-      await AsyncStorage.removeItem('stats');
-      await AsyncStorage.removeItem('breakfast');
-      await AsyncStorage.removeItem('dinner');
-      await AsyncStorage.removeItem('lunch');
-      await AsyncStorage.removeItem('snacks');
+      AsyncStorage.getAllKeys(async (err, keys) => {
+        await AsyncStorage.multiRemove(keys, e => {
+          navigationAction('AuthLoading', navigation);
+        });
+      });
     })
     .catch(e => {
       error(e);
     });
-  navigationAction('AuthLoading', navigation);
 };
 
 const CustomDrawer = ({

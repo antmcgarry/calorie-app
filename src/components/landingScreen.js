@@ -25,6 +25,8 @@ class LandingScreen extends Component {
   setUserStats = async () => {
     const breakfastResult = await AsyncStorage.getItem('breakfast');
     const dinnerResult = await AsyncStorage.getItem('dinner');
+    const lunchResult = await AsyncStorage.getItem('lunch');
+    const snacksResult = await AsyncStorage.getItem('snacks');
 
     const {
       navigation: {
@@ -33,6 +35,7 @@ class LandingScreen extends Component {
       userActions: { updateStats },
       actions: { loadFoodLists }
     } = this.props;
+    const { loading } = this.state;
     updateStats(params.stats);
     if (breakfastResult) {
       const breakfast = JSON.parse(breakfastResult);
@@ -41,6 +44,17 @@ class LandingScreen extends Component {
     if (dinnerResult) {
       const dinner = JSON.parse(dinnerResult);
       loadFoodLists(dinner, 'dinner');
+    }
+    if (lunchResult) {
+      const lunch = JSON.parse(lunchResult);
+      loadFoodLists(lunch, 'lunch');
+    }
+    if (snacksResult) {
+      const snacks = JSON.parse(snacksResult);
+      loadFoodLists(snacks, 'snacks');
+    }
+    if (this.props.state.dailyGoalCalories > 0 && loading) {
+      this.setState({ loading: false });
     }
   };
 
@@ -54,13 +68,10 @@ class LandingScreen extends Component {
     const { loading } = this.state;
     let remainingPercent = 100 * (caloriesConsumed / dailyGoalCalories);
     const calsLeft = dailyGoalCalories - caloriesConsumed;
-    if (dailyGoalCalories > 0 && loading) {
-      this.setState({ loading: false });
-    }
     return (
       <Container>
         <HeaderBar
-          wantManu
+          wantMenu
           onLeftPress={() => openDrawer()}
           onRightPress={() => navigate('Rewards')}
         />
